@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres_dev:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWRD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5441:5432"
+    volumes:
+      - postgres-data-dev:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+    networks:
+      - utter_network
+      
+  pgadmin_dev:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8022:80"
+    volumes:
+      - pgadmin-data-dev:/var/lib/pgadmin
+    depends_on:
+      - postgres_dev
+    restart: always
+    networks:
+      - utter_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
+networks:
+  utter_network:
+    driver: bridge
+
+volumes:
+  postgres-data-dev:
+  pgadmin-data-dev:

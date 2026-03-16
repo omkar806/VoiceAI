@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  uttertuple_backend_dev:
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/backend.Dockerfile
+    container_name: uttertuple_backend_dev
+    volumes:
+      - ./common:/app/common
+    ports:
+      - "8082:8082"
+    env_file:
+      - ./src/backend/etc/.env
+    restart: always
+    networks:
+      - utter_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  uttertuple_frontend_dev:
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/frontend.Dockerfile
+    container_name: uttertuple_frontend_dev
+    ports:
+      - "3015:3015"
+    env_file:
+      - ./src/frontend/.env
+    volumes:
+      - ./common:/app/common
+    restart: always
+    environment:
+      - API_URL=http://api_service:8020/api/v1
+    networks:
+      - utter_network
+    depends_on:
+      - uttertuple_backend_dev
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+  # uttertuple_livekit_service_dev:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./dockerfiles/livekit.Dockerfile
+  #   container_name: uttertuple_livekit_service_dev
+  #   volumes:
+  #     - ./common:/app/common
+  #   env_file:
+  #     - ./src/livekit_server/.env
+  #   restart: always
+  #   networks:
+  #     - utter_network
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '1'
+  #         memory: 1024M
+
+volumes:
+  postgres-data-uttertuple:
+
+networks:
+  utter_network:
+    driver: bridge
+
+

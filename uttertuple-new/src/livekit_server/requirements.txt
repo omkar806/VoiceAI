@@ -1,0 +1,15 @@
+livekit==1.0.5
+livekit-agents==1.0.11
+livekit-api==1.0.2
+livekit-plugins-cartesia==1.0.11
+livekit-plugins-deepgram==1.0.11
+livekit-plugins-noise-cancellation==0.2.1
+livekit-plugins-openai==1.0.11
+livekit-plugins-silero==1.0.11
+livekit-plugins-turn-detector==1.0.11
+livekit-protocol==1.0.1
+python-dotenv==1.1.0
+livekit-plugins-assemblyai==1.0.11
+livekit-plugins-anthropic==1.0.11
+livekit-plugins-elevenlabs==1.0.11
+livekit-plugins-groq==1.0.11

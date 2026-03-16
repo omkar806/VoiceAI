@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: uttertuple-auth-manager-app
+    ports:
+      - "8021:8021"
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app/app
+    networks:
+      - uttertuple_main_utter_network
+    restart: "unless-stopped"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+  postgres_authtuple_dev:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=authtuple_local
+    ports:
+      - "5442:5432"
+    volumes:
+      - postgres-data-authtuple-dev:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U authtuple_local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+volumes:
+  postgres-data-authtuple-dev:
+networks:
+  uttertuple_main_utter_network:
+    external: true 

@@ -1,0 +1,368 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 248, 250, 252;
+  --background-end-rgb: 255, 255, 255;
+  --card-bg: 255, 255, 255;
+  --card-border: 229, 231, 235;
+  --heading-color: 17, 24, 39;
+  --text-color: 75, 85, 99;
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 15, 23, 42;
+  --card-bg: 31, 41, 55;
+  --card-border: 55, 65, 81;
+  --heading-color: 255, 255, 255;
+  --text-color: 209, 213, 219;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  /* Prevent white flash during page transitions */
+  background-color: #f8fafc;
+  transition: background-color 0.1s ease-out;
+}
+
+/* Dark mode body background */
+.dark body {
+  background-color: #111827;
+}
+
+/* Prevent flash of unstyled content */
+html {
+  background-color: #f8fafc;
+  scroll-behavior: smooth;
+}
+
+.dark html {
+  background-color: #111827;
+}
+
+/* Immediate theme application to prevent flash */
+html.dark {
+  background-color: #111827 !important;
+}
+
+html.dark body {
+  background-color: #111827 !important;
+  color: #f8fafc !important;
+}
+
+/* Ensure all elements inherit proper background */
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-gray-900 dark:text-white;
+  }
+  
+  p {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+}
+
+@layer components {
+  /* Custom component styles */
+  .card {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm p-5;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md transition-colors;
+  }
+  
+  .input {
+    @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors;
+  }
+  
+  /* Agent card styles */
+  .agent-card {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm p-6 transition-all duration-200 hover:shadow-md;
+  }
+  
+  /* Table styles */
+  .table-container {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden;
+  }
+  
+  .table-header {
+    @apply bg-gray-50 dark:bg-gray-900 text-left text-gray-500 dark:text-gray-400 uppercase text-xs font-medium;
+  }
+  
+  .table-row {
+    @apply border-t border-gray-200 dark:border-gray-700;
+  }
+}
+
+/* Utility classes for consistent dark mode across pages */
+.dark-bg-primary {
+  @apply bg-gray-900;
+}
+
+.dark-bg-secondary {
+  @apply bg-gray-800;
+}
+
+.dark-text-primary {
+  @apply text-white;
+}
+
+.dark-text-secondary {
+  @apply text-gray-300;
+}
+
+.dark-border {
+  @apply border-gray-700;
+}
+
+/* Dark mode specific classes */
+.dark-mode-flow .react-flow__controls {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+.dark-mode-flow .react-flow__controls button {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+.dark-mode-flow .react-flow__controls button:hover {
+  background-color: #374151;
+}
+
+.dark-mode-flow .react-flow__background {
+  background-color: #111827;
+}
+
+.dark-mode-flow .react-flow__node {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+.dark-mode-flow .react-flow__edge path {
+  stroke: #6b7280;
+}
+
+.dark-mode-flow .react-flow__attribution {
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+/* Add ReactFlow dark mode styles */
+.dark-mode-flow .react-flow__node {
+  color: #e2e8f0;
+}
+
+.dark-mode-flow .react-flow__handle {
+  background: #475569;
+  border-color: #1e293b;
+}
+
+.dark-mode-flow .react-flow__edge-path {
+  stroke: #64748b;
+}
+
+.dark-mode-flow .react-flow__controls {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dark-mode-flow .react-flow__controls-button {
+  background: #334155;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+.dark-mode-flow .react-flow__controls-button:hover {
+  background: #475569;
+}
+
+.dark-mode-flow .react-flow__attribution {
+  background: rgba(30, 41, 59, 0.8);
+  color: #94a3b8;
+}
+
+.dark-flow-instance {
+  background-color: #1e293b !important;
+  background-image: radial-gradient(#334155 1px, transparent 1px) !important;
+  background-size: 20px 20px !important;
+}
+
+.dark-flow-instance .react-flow__node {
+  color: #e2e8f0;
+}
+
+.dark-flow-instance .react-flow__handle {
+  background: #475569;
+  border-color: #1e293b;
+}
+
+.dark-flow-instance .react-flow__controls {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dark-flow-instance .react-flow__controls-button {
+  background: #334155;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+.dark-flow-instance .react-flow__controls-button:hover {
+  background: #475569;
+}
+
+/* Page Transition Animations - Very Fast and Smooth */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply smooth transitions to all page content */
+.page-transition {
+  animation: pageEnter 0.1s ease-out forwards;
+  background-color: inherit;
+}
+
+.page-transition-exit {
+  animation: pageExit 0.05s ease-in forwards;
+}
+
+/* Smooth transitions for main content areas */
+main, .main-content, [role="main"] {
+  animation: fadeInUp 0.12s ease-out;
+  transition: all 0.1s ease-out;
+  background-color: inherit;
+}
+
+/* Fast transitions for navigation links */
+a, button {
+  transition: all 0.08s ease-out;
+}
+
+/* Smooth hover effects */
+.hover-lift:hover {
+  transform: translateY(-1px);
+  transition: transform 0.08s ease-out;
+}
+
+/* Card animations */
+.card-animate {
+  animation: fadeInUp 0.1s ease-out;
+  transition: all 0.1s ease-out;
+}
+
+.card-animate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* List item animations */
+.list-item-animate {
+  animation: fadeInUp 0.08s ease-out;
+  transition: all 0.08s ease-out;
+}
+
+/* Stagger animation for multiple items */
+.stagger-1 { animation-delay: 0.02s; }
+.stagger-2 { animation-delay: 0.04s; }
+.stagger-3 { animation-delay: 0.06s; }
+.stagger-4 { animation-delay: 0.08s; }
+.stagger-5 { animation-delay: 0.1s; }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize rendering for smooth animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU acceleration for smooth animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Fast content loading animation */
+.content-fade-in {
+  animation: fadeInUp 0.08s ease-out;
+  background-color: inherit;
+}
+
+/* Sidebar transition improvements */
+.sidebar-transition {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Page container smooth transitions */
+.page-container {
+  animation: pageEnter 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  background-color: inherit;
+  min-height: 100vh;
+}
+
+/* Prevent flash during theme transitions */
+.theme-transition * {
+  transition: background-color 0.1s ease-out, color 0.1s ease-out, border-color 0.1s ease-out !important;
+}
